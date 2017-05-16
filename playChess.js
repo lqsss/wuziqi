@@ -15,7 +15,10 @@ drawing.addEventListener("mousedown",function (event) {
     if(px<0||py<0||py>498||px>498|| chessData[x][y] != 0){  //超出棋盘
         return ;
     }
-    doCheck(x,y);
+    if(event.button===0) {
+        doCheck(x,y);
+    }
+
 })
 function chess(color,x,y){              //绘制棋子
     context.fillStyle =color;
