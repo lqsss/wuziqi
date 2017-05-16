@@ -9,7 +9,10 @@ var funcArray = [
 ];
 function judge(color,x,y){
     for(var i = 0;i<4;i++){
-        funcArray[i](color,x,y);
+        if(funcArray[i](color,x,y)){
+            winner =color;
+            return true;
+        }
     }
 }
 //判断X轴

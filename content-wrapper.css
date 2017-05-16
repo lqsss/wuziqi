@@ -1,0 +1,16 @@
+.content-wrapper{
+    display: inline-block;
+    height:510px;
+}
+h1.title{
+    font-size:14px;
+}
+.record{
+    width:300px;
+    height:450px;
+    background-color:#EEE5DE;
+    overflow: auto;
+}
+ul{
+    list-style-type: none;
+}

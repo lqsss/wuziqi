@@ -38,10 +38,12 @@ function chessOneStep(color,x,y){    //落子
     if(color==="black"){
         chess(color,x,y);
         console.log("黑子:"+x,y);
+        record(color,x,y);
         judge(color,x,y);
     }else{
         chess(color,x,y);
         console.log("白子:"+x,y);
+        record(color,x,y);
         judge(color,x,y);
     }
     if(!(totalStep--)){
@@ -50,6 +52,10 @@ function chessOneStep(color,x,y){    //落子
 }
 
 function doCheck(x,y){
+    if(winner!==""){
+        alert("游戏已经分出结果了！");
+        return;
+    }
     if(!isWhite){               //该黑子下
         chessOneStep("black",x,y);
         isWhite=true;

@@ -13,3 +13,6 @@ for(var i=0;i<10;i++){
 }
 window.totalStep = 100;
 window.isWhite = false; //默认黑棋先手
+window.winner = "";
+window.blackHand = 0;
+window.whiteHand = 0;
