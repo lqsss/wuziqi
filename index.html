@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>五子棋</title>
-    <script type="text/javascript"src="./main.js"></script>
+
+    <script type="text/javascript" defer="defer" src="./AI.js"></script>
     <script type="text/javascript" defer="defer" src="./initChess.js"></script>
     <script type="text/javascript" defer="defer" src="./playChess.js"></script>
     <script type="text/javascript" defer="defer" src="./winOrLose.js"></script>
     <script type="text/javascript" defer="defer" src="./other.js"></script>
+    <script type="text/javascript" defer="defer" src="./main.js"></script>
+
     <link rel="stylesheet" type="text/css" href="chess.css" />
     <link rel="stylesheet" type="text/css" href="content-wrapper.css" />
 </head>
 <body>
 <canvas id="drawing" width="510" height="510"></canvas>
 <div class="content-wrapper">
-    <button class="start" onclick="newGame()">玩家互lou</button>
-    <button class="start" onclick="newGame()">干死AI</button>
+    <button class="start">玩家互lou</button>
+    <button class="AI" >干死AI</button>
     <h1 class="title">record</h1>
     <div class="record">
         <ul>

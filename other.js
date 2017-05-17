@@ -2,9 +2,7 @@
  * Created by liqiushi on 2017/5/15.
  */
 //start
-function newGame(){
-    location.reload();
-}
+
 function record(color,x,y){
     var record= document.getElementsByClassName("record");
     record[0].scrollTop= record[0].scrollHeight;
