@@ -199,7 +199,7 @@ function score(count,death){
     return score;
 }
 
-// console.log("count" + count + "death" + death);
+
 
 
 
