@@ -4,29 +4,8 @@
 /**
  * Created by liqiushi on 2017/5/15.
  */
-//document.write("<script language=javascript src='./winOrLose.js'></script>");
-/*
-function addEvent(){
-    var px =event.offsetX;
-    var py =event.offsetY;
-    var x = parseInt(px / 52);
-    var y = parseInt(py / 52);
-    if(px<0||py<0||py>498||px>498|| chessData[x][y] != 0){  //超出棋盘
-        return ;
-    }
-    if(event.button===0) {
-        doCheck(x,y);
-    }
-}*/
-var flag="还未确认！";
-var start =document.getElementsByClassName("start")[0];
-start.onclick=function newGame(){
-    location.reload(false);
-    flag = selectModel[0];
-    console.log(flag);
-};
 
-drawing.onclick=function(){
+drawing.onmousedown=function(){
     var px =event.offsetX;
     var py =event.offsetY;
     var x = parseInt(px / 52);
@@ -53,9 +32,9 @@ function chess(color,x,y){              //绘制棋子
 }
 
 function chessOneStep(color,x,y){    //落子
-    if(flag===selectModel[0]){
+    if(localStorage.__flag__===selectModel[0]){
         personModel(color,x,y);
-    }else if(flag ===selectModel[1]){
+    }else if(localStorage.__flag__===selectModel[1]){
         botModel(color,x,y);
     }else{
         alert("err!");

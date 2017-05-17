@@ -18,3 +18,26 @@ function record(color,x,y){
     }
     recordUl[0].appendChild(recordList);
 }
+
+var start =document.getElementsByClassName("start")[0];
+start.onclick=function newGame(){
+    if(!window.localStorage){
+        alert("浏览器不支持localStorage");
+        return false;
+    }else{
+        flag = selectModel[0];
+        window.localStorage.__flag__=flag;
+    }
+    location.reload();
+};
+var AIstart =document.getElementsByClassName("AI-start")[0];
+AIstart.onclick = function(){
+    if(!window.localStorage){
+        alert("浏览器不支持localStorage");
+        return false;
+    }else{
+        flag = selectModel[1];
+        window.localStorage.__flag__=flag;
+    }
+    location.reload();
+};

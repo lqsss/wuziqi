@@ -2,7 +2,7 @@
  * Created by liqiushi on 2017/5/15.
 */
 window.chessData=new Array(10);
-//window.flag="还未确认！";
+window.flag="还未确认！";
 window.selectModel=["玩家互lou","干死AI"];
 
 
