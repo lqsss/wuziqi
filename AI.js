@@ -1,15 +1,17 @@
 /**
  * Created by liqiushi on 2017/5/16.
  */
+
 var LEVEL_ONE = 0;//单子
 var LEVEL_TWO = 1;//眠2，眠1
 var LEVEL_THREE = 1500;//眠3，活2
 var LEVEL_FOUR = 4000;//冲4，活3
 var LEVEL_FIVE = 10000;//活4
 var LEVEL_SIX = 100000;//成5
+
 function computedScore(x,y){
-    var whiteScore = sX(x,y,1)+ sY(x,y,1)+sLXY(x,y,1);
-    var blackScore = sX(x,y,2)+sY(x,y,2)+sLXY(x,y,2);
+    var whiteScore = sX(x,y,1)+ sY(x,y,1)+sLXY(x,y,1)+sRXY(x,y,1);
+    var blackScore = sX(x,y,2)+sY(x,y,2)+sLXY(x,y,2)+sRXY(x,y,2);;
     var totalScore = whiteScore+blackScore;
     return totalScore;
 }
@@ -34,39 +36,38 @@ function TurnForAI(){
   var pos = getPosition();
   doCheck(pos[0],pos[1]);
 }
-function sX(x,y,num){     //num 1 白 2黑
+function sX(x,y,num) {     //num 1 白 2黑
     var death = 0;
     var count = 0;
     var tmpRecord = new Array(10);
-   // var tmpRecord = window.chessData.concat();
-    for(let i=0;i<10;i++){
-        tmpRecord[i]= new Array(10);
-        for(let j=0;j<10;j++){
-             tmpRecord[i][j] = chessData[i][j];
+    // var tmpRecord = window.chessData.concat();
+    for (let i = 0; i < 10; i++) {
+        tmpRecord[i] = new Array(10);
+        for (let j = 0; j < 10; j++) {
+            tmpRecord[i][j] = chessData[i][j];
         }
     }
-    tmpRecord[x][y]=num;  //假设这个空位落 num对应颜色的旗子
-    for(var i=x;i>=0;i--){      //x正半轴
-        if(tmpRecord[i][y]===num){
+    tmpRecord[x][y] = num;  //假设这个位落 num对应颜色的旗子
+    for (var i = x; i >= 0; i--) {      //x负半轴
+        if (tmpRecord[i][y] === num) {
             count++;
-        }else if(tmpRecord[i][y]===0){
+        } else if (tmpRecord[i][y] === 0) {
             break;
-        }else{
+        } else {
             death++;
             break;
         }
     }
-    for(var i=0;i<10;i++){      //x负半轴
-        var tmpX=x-i;
-        if(tmpX>=0&&tmpRecord[tmpX][y]==num){
-            count++;
-        }else if(tmpX>=0&&tmpRecord[x-i][y]===0){
-            break;
-        }else{
-            death++;
-            break;
+    for(var i=x;i<10;i++){      //x+半轴
+            if(tmpRecord[i][y]==num){
+                count++;
+            }else if(tmpRecord[i][y]===0){
+                break;
+            }else{
+                death++;
+                break;
+            }
         }
-    }
     count--;
     return score(count,death);
 }
@@ -82,7 +83,7 @@ function sY(x,y,num){     //num 1 白 2黑
         }
     }
     tmpRecord[x][y]=num;  //假设这个空位落 num对应颜色的旗子
-    for(var i=x;i>=0;i--){      //Y负半轴
+    for(var i=y;i>=0;i--){      //Y负半轴
         if(tmpRecord[x][i]===num){
             count++;
         }else if(tmpRecord[x][i]===0){
@@ -92,17 +93,16 @@ function sY(x,y,num){     //num 1 白 2黑
             break;
         }
     }
-    for(var i=0;i<10;i++){      //Y正半轴
-        var tmpY = y+i;
-        if(tmpY<=9&&tmpRecord[x][tmpY]==num){
-            count++;
-        }else if(tmpY<=9&&tmpRecord[x][tmpY]===0){
-            break;
-        }else{
-            death++;
-            break;
+    for(var i=y;i<10;i++){      //Y正半轴
+            if(tmpRecord[x][i]==num){
+                count++;
+            }else if(tmpRecord[x][i]===0){
+                break;
+            }else{
+                death++;
+                break;
+            }
         }
-    }
     count--;
     return score(count,death);
 }
@@ -129,17 +129,15 @@ function sLXY(x,y,num){    //左斜轴
             break;
         }
     }
-    for(var i=0;i<10;i++){      //X正半轴 Y负半轴
-        var tmpX = x+i;
-        var tmpY = y+i;
-        if(tmpY<=9&&tmpX<=9&&tmpRecord[tmpX][tmpY]==num){
-            count++;
-        }else if(tmpY<=9&&tmpX<=9&&tmpRecord[tmpX][tmpY]===0){
-            break;
-        }else{
-            death++;
-            break;
-        }
+    for(var i=x,j=y;i<10;i++,j++){      //X正半轴 Y负半轴
+            if(tmpRecord[i][j]==num){
+                count++;
+            }else if(tmpRecord[i][j]===0){
+                break;
+            }else {
+                death++;
+                break;
+            }
     }
     count--;
     return score(count,death);
@@ -157,28 +155,26 @@ function sRXY(x,y,num){    //右斜轴
         }
     }
     tmpRecord[x][y]=num;  //假设这个空位落 num对应颜色的旗子
-    for(var i=0,j=y;i<=9&&j>=0;i++,j--){      //X正半轴 Y正半轴
-        var tmpX = x+i;
-        if(tmpX<=9&&tmpRecord[tmpX][j]===num){
-            count++;
-        }else if(tmpX<=9&&tmpRecord[tmpX][j]===0){
-            break;
-        }else{
-            death++;
-            break;
-        }
+    for(var i=x,j=y;i<=9&&j>=0;i++,j--){      //X正半轴 Y正半轴
+            if(tmpRecord[i][j]===num){
+                count++;
+            }else if(tmpRecord[i][j]===0){
+                break;
+            }else{
+                death++;
+                break;
+            }
+
     }
-    for(var i=0;i<10;i++){      //X负半轴 Y负半轴
-        var tmpX = x-i;
-        var tmpY = y+i;
-        if(tmpY<=9&&tmpX>=0&&tmpRecord[tmpX][tmpY]==num){
-            count++;
-        }else if(tmpY<=9&&tmpX>=0&&tmpRecord[tmpX][tmpY]===0){
-            break;
-        }else{
-            death++;
-            break;
-        }
+    for(var i=x,j=y;i>=0&&j<=9;i--,j++){      //X负半轴 Y负半轴
+            if(tmpRecord[i][j]==num){
+                count++;
+            }else if(tmpRecord[i][j]===0){
+                break;
+            }else{
+                death++;
+                break;
+            }
     }
     count--;
     return score(count,death);
@@ -202,6 +198,8 @@ function score(count,death){
     }
     return score;
 }
+
+// console.log("count" + count + "death" + death);
 
 
 
