@@ -5,6 +5,6 @@
 
 五子棋(二)判断输赢https://segmentfault.com/n/1330000009531253
 
-五子棋(三)AIhttps://segmentfault.com/n/1330000009531359
+五子棋(三)AI https://segmentfault.com/n/1330000009531359
 
 五子棋(四)其他https://segmentfault.com/n/1330000009531441
